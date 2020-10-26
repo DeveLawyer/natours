@@ -22,6 +22,7 @@ body {
   padding: 30px;
 }
 
+/*** HERO ***/
 .header {
   height: 95vh;
   background-image: linear-gradient(
@@ -58,6 +59,8 @@ body {
   color: #fff;
   text-transform: uppercase;
   margin-bottom: 60px;
+
+  backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -88,6 +91,7 @@ body {
   display: inline-block;
   border-radius: 100px;
   transition: all 0.2s;
+  position: relative;
 }
 
 .btn:hover {
@@ -105,15 +109,45 @@ body {
   color: #777;
 }
 
-/* Animations */
+.btn::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInButton 0.5s ease-out 0.75s;
+  /* This sets the initial state of the animation to 0% */
+  animation-fill-mode: backwards;
+}
+
+/*** ANIMATIONS ***/
 @keyframes moveInLeft {
   0% {
     opacity: 0;
     transform: translateX(-100px);
   }
+
   80% {
     transform: translateX(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -125,11 +159,25 @@ body {
     opacity: 0;
     transform: translateX(100px);
   }
+
   80% {
     transform: translateX(-10px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes moveInButton {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
